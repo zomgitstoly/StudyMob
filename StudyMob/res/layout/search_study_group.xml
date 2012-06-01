@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- TITLE: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/search_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="20sp"/>
+    <!-- TITLE: END -->
+    
+    <!-- Filter Study Mobs: BEGIN -->
+    <!-- Use DropDown Menu?
+	<LinearLayout
+        android:id="@+id/searchby_filter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/searchby_prompt"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="10dp"
+		    android:gravity="center_horizontal"
+		    android:text="@string/searchby_prompt"/>
+		<Spinner
+		    android:id="@+id/subjects_spinner"
+		    android:layout_width="150dp"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/searchby_prompt"
+		    android:prompt="@string/searchby_prompt"/>
+    </LinearLayout> -->
+    <!-- Filter Study Mobs: END -->
+
+	<!-- Search for Student: BEGIN -->
+	<TextView 
+	    android:id="@+id/searchby_student_label"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/title"
+	    android:paddingLeft="2sp"
+	    android:paddingTop="7sp"
+	    android:paddingBottom="7sp"
+	    android:text="@string/searchby_student_label"/>
+	<EditText 
+	    android:id="@+id/searchby_student_field"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/searchby_student_label"/>
+	<!-- Search for Student: END -->
+	
+	
+
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+        android:id="@+id/buttons"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/search"/>
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/search"
+        	android:onClick="onClick"
+        	android:text="@string/clear"/>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/clear"
+        	android:onClick="onClick"
+        	android:text="@string/cancel"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+
+</RelativeLayout>

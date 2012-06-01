@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- TITLE: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Study Group Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="20sp"/>
+    <!-- TITLE: END -->
+    
+    <!-- Details: BEGIN -->
+    <LinearLayout
+        android:id="@+id/details"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:orientation="vertical">
+	    <RelativeLayout 
+	        android:id="@+id/location"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp">
+	        <TextView 
+		        android:id="@+id/location_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/location_label"/>
+	        <TextView 
+		        android:id="@+id/location_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_toRightOf="@id/location_label"
+		        android:text="UC Davis"/>
+	    </RelativeLayout>
+	    <RelativeLayout 
+	        android:id="@+id/display_class"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp">
+	        <TextView 
+		        android:id="@+id/class_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/class_label"/>
+	        <TextView
+	            android:id="@+id/class_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_toRightOf="@id/location_label"
+		        android:text="ECS160"/>
+	    </RelativeLayout>
+	    <RelativeLayout 
+	        android:id="@+id/time"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp">
+	        <TextView 
+		        android:id="@+id/time_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/time_label"/>
+	        <TextView
+	            android:id="@+id/time_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_toRightOf="@id/time_label"
+		        android:text="4:00 PM"/>
+	    </RelativeLayout>
+	    <TextView 
+	        android:id="@+id/members_label"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="5sp"
+	        android:paddingTop="10sp"
+	        android:text="@string/members_label"/>
+	    <ListView 
+	        android:id="@+id/members_list"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+    <!-- Details: END -->
+    
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+        android:id="@+id/buttons"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+        <Button
+            android:id="@+id/join"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/leave"/>
+        <Button
+            android:id="@+id/invite"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/join"
+        	android:onClick="onClick"
+        	android:text="@string/invite"/>
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/invite"
+        	android:onClick="onClick"
+        	android:text="@string/back"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+
+</RelativeLayout>

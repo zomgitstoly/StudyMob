@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- Title: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="40sp"/>
+    <!-- Title: END -->
+    
+    <!-- Details: BEGIN -->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="315sp"
+        android:fillViewport="true">
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <!-- Owner -->
+        <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:text="@string/owner_label"
+	        android:textColor="#FFFFFF"
+	        android:textStyle="bold"
+	        android:background="#357EC7"
+	        android:paddingLeft="5sp"
+	        android:paddingTop="7sp"
+	        android:paddingBottom="5sp"/>
+        <TextView
+	        android:id="@+id/owner_field"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:text=""
+	        android:padding="10sp"/>
+	    <!-- Topic -->
+        <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:text="@string/topic_label"
+	        android:textColor="#FFFFFF"
+	        android:textStyle="bold"
+	        android:background="#357EC7"
+	        android:paddingLeft="5sp"
+	        android:paddingTop="7sp"
+	        android:paddingBottom="5sp"/>
+        <TextView
+	        android:id="@+id/topic_field"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text=""
+	        android:paddingTop="10sp"
+	        android:paddingBottom="10sp"/>
+        <!-- General Information -->
+        <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:text="@string/general_info"
+	        android:textColor="#FFFFFF"
+	        android:textStyle="bold"
+	        android:background="#357EC7"
+	        android:paddingLeft="5sp"
+	        android:paddingTop="7sp"
+	        android:paddingBottom="5sp"/>
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp">
+	        <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/class_label"
+		        android:textStyle="bold"/>
+	        <TextView
+		        android:id="@+id/class_field"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:text=""/>
+	    </RelativeLayout>
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp">
+	        <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/date_label"
+		        android:textStyle="bold"/>
+	        <TextView
+	            android:id="@+id/date_field"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:text=""/>
+	    </RelativeLayout>
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp"
+	        android:paddingBottom="10sp">
+	        <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/location_label"
+		        android:textStyle="bold"/>
+	        <TextView
+	            android:id="@+id/location_field"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:text=""/>
+	    </RelativeLayout>
+	    <!-- Members -->
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:text="@string/members_label"
+	        android:textColor="#FFFFFF"
+	        android:textStyle="bold"
+	        android:background="#357EC7"
+	        android:paddingLeft="5sp"
+	        android:paddingTop="7sp"
+	        android:paddingBottom="5sp"/>
+	    <ListView 
+	        android:id="@+id/memberlist"
+	        android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+	    </ListView>
+	</LinearLayout>
+	</ScrollView>
+    <!-- Details: END -->
+    
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/back"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+
+
+</LinearLayout>

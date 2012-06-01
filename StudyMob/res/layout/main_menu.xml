@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- Title: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/main_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="40sp"/>
+    <!-- Title: END -->
+    
+    <!-- Menu Items: BEGIN -->
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal"
+	    >
+	    <Button
+	        android:id="@+id/map"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/map_button">	        
+	    </Button>
+	    <Button
+	        android:id="@+id/search"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/search_button">	        
+	    </Button>
+	    <Button
+	        android:id="@+id/create"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/create_group_button">	        
+	    </Button>
+	    <Button
+	        android:id="@+id/account"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/account_button">	        
+	    </Button>
+	    <Button
+	        android:id="@+id/notifications"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="Notifications">	        
+	    </Button>
+	    <Button
+	        android:id="@+id/buddylist"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/buddylist_button">	        
+	    </Button>
+	    <Button
+	        android:id="@+id/logout"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/logout_button">	        
+	    </Button>
+	</LinearLayout>
+    <!-- Menu Items: END -->
+
+</LinearLayout>

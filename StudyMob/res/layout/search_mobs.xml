@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- TITLE: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Search Study Mobs"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="20sp"/>
+    <!-- TITLE: END -->
+    
+    <!-- Choose Department: BEGIN -->
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center_vertical"
+	    android:paddingLeft="30sp"
+	    android:paddingBottom="7sp">
+	    <Spinner 
+			android:id="@+id/dept_spinner"
+			android:layout_width="125dp"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"/>
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_alignBaseline="@+id/dept_spinner"
+	        android:layout_alignBottom="@+id/dept_spinner"
+	        android:layout_alignParentLeft="true"
+	        android:gravity="center_vertical"
+	        android:text="@string/select_dept"/>
+	</RelativeLayout>
+	<!-- Choose Department: END -->
+	
+	<!-- Choose Class: BEGIN -->
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center_vertical"
+	    android:paddingLeft="30sp"
+	    android:paddingBottom="7sp">
+	    <Spinner 
+			android:id="@+id/class_spinner"
+			android:layout_width="125dp"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"/>
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_alignBaseline="@+id/class_spinner"
+	        android:layout_alignBottom="@+id/class_spinner"
+	        android:layout_alignParentLeft="true"
+	        android:gravity="center_vertical"
+	        android:text="@string/select_class"/>
+	</RelativeLayout>
+	<!-- Choose Class: END -->
+	
+    
+    <!-- Display List of Mobs: BEGIN -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="240dp">
+	    <TextView 
+	        android:id="@+id/nothing_selected"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="No Class Selected"
+	        android:textSize="20sp"
+	        android:gravity="center_horizontal"
+	        android:padding="40sp"/>
+		<TableLayout 
+		    android:id="@+id/classes"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent">
+		    <TableRow>
+		        <ListView 
+		            android:id="@android:id/list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:clickable="false"></ListView>
+		    </TableRow>
+		</TableLayout>
+	</RelativeLayout>
+    <!-- Display List of Mobs: END -->
+    
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+        android:id="@+id/buttons"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="150sp"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/back"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+
+</LinearLayout>

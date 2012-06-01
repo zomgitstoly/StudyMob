@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- TITLE: BEGIN -->
+    <TextView
+        android:id="@+id/title_location_mob"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:text="@string/notifications"
+        android:textStyle="bold"
+        android:padding="20sp"/>
+    <!-- TITLE: END -->    
+    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="350dp"
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal"
+	    >
+	    <Button
+	        android:id="@+id/requests"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+        	android:text="@string/requests">	        
+	    </Button>
+
+	    <Button
+	        android:id="@+id/invites"
+	        android:layout_width="150sp"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+	        android:text="@string/invites" />
+
+	</LinearLayout> 
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+        android:id="@+id/buttons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:gravity="center_horizontal"
+        android:padding="10sp" >
+        <Button
+            android:id="@+id/back"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="@string/back" />
+    </RelativeLayout>
+
+    <!-- BUTTONS: END -->
+
+</LinearLayout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <!-- Title: BEGIN -->
+	<TextView 
+	    android:id="@+id/title"
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:text="@string/main_title"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		android:padding="40sp"/>
+    <!-- Title: END -->
+    
+	<!-- Form: BEGIN -->	
+	<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp">
+        
+        <TextView 
+            android:id="@+id/email_label"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/email_label"
+        	android:paddingBottom="7sp"
+        	android:paddingLeft="2sp"/>
+        <EditText
+            android:id="@+id/email_field"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:background="@android:drawable/editbox_background"
+        	android:inputType="textEmailAddress"/>
+        <TextView 
+            android:id="@+id/password_label"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/password_label"
+        	android:paddingBottom="7sp"
+        	android:paddingTop="7sp"
+        	android:paddingLeft="2sp"/>
+        <EditText
+            android:id="@+id/password_field"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:background="@android:drawable/editbox_background"
+        	android:inputType="textPassword"/>
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:paddingTop="7sp" />
+	</LinearLayout>
+	<!-- Form: END -->
+	
+	<!-- Remember Password: BEGIN -->
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:paddingLeft="10sp"
+	    android:paddingBottom="10sp">
+	    <CheckBox
+	        android:id="@+id/remember_psswd_check" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
+	    <TextView 
+	        android:id="@+id/remember_psswd_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/remember_psswd"
+	        android:paddingLeft="10sp"/>
+	</LinearLayout>
+	<!-- Remember Password: END -->
+	
+	<!-- Buttons: BEGIN -->
+	<LinearLayout
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:padding="10sp">
+        <Button
+            android:id="@+id/new_account"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/new_account"/>
+	    <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/login_button"/>
+	</LinearLayout>
+	<!-- Buttons: END -->
+	
+	<!-- Forgot Password: BEGIN -->
+	<LinearLayout
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+	    <TextView 
+            android:id="@+id/forgot_password"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="center_horizontal"
+        	android:text="@string/forgot_password"
+        	android:onClick="onClick"
+        	android:clickable="true"
+        	android:padding="5sp"/>
+	</LinearLayout>
+	<!-- Forgot Password: END -->
+</LinearLayout>

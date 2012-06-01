@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StudyMob</string>
+    <string name="loading">Loading Data...</string>
+    
+    <!-- Others: BEGIN -->
+    <string name="clear_space"></string>
+    <!-- Others: END -->
+    
+    <!-- Labels: BEGIN -->
+	<string name="email_label">Email Address:</string>
+	<string name="password_label">Password:</string>
+	<string name="retype_password_label">Retype Password: </string>
+	<string name="new_account">Create Account</string>
+	<string name="submit">Submit</string>
+	<string name="cancel">Cancel</string>
+	<string name="back">Back</string>
+	<string name="name">Name: </string>
+	<string name="first_name">First Name: </string>
+	<string name="last_name">Last Name: </string>
+	<string name="cont">Continue</string>
+	<string name="search">Search</string>
+    <string name="clear">Clear</string>
+    <string name="join">Join</string>
+    <string name="leave">Leave</string>
+    <string name="disband">Disband</string>
+    <string name="invite">Invite</string>
+    <string name="remember_psswd">Remember password</string>
+    <!-- Labels: END -->
+    
+    <!-- Title Page: BEGIN -->
+    <string name="main_title">StudyMob</string>
+    <string name="login_button">Log In</string>
+    <string name="forgot_password"><u>Forgot Password</u></string>
+    <!-- Title Page: END -->
+    
+    <string name="edit_profile">Edit my profile</string>
+    
+    <!-- New Account Page: BEGIN -->
+	<string name="new_account_title">New Account</string>
+	<string name="providers_label">I can provide help for these classes: </string>
+	<string name="consumers_label">Consumeres: </string>
+	<!-- New Account Page: END -->
+	
+	<!-- Forgot Password Page: BEGIN -->
+	<string name="forgot_password_title">Forgot Password</string>
+	<string name="forgot_password_instructions">
+	    You will be sent an Email to the Email address that you enter that will contain instructions on how to retrieve your password.
+	</string>
+	<!-- Forgot Password Page: END -->
+	
+	<!-- Providers/Consumers Page: BEGIN -->
+	<string name="providers_title">Choose the classes that you can provide help for.</string>
+	<string name="consumers_title">Choose the classes that you seek help with.</string>
+	<!-- Providers/Consumers Page: END -->
+	
+	<!-- Main Menu Page: BEGIN -->
+	<string name="menu_title">Main Menu</string>
+	<string name="map_button">Map</string>
+	<string name="search_button">Search StudyMobs</string>
+	<string name="create_group_button">Create a StudyMob</string>
+	<string name="account_button">View Account</string>
+	<string name="buddylist_button">Buddy List</string>
+	<string name="logout_button">Logout</string>
+	<!-- Main Menu Page: END -->
+	
+	<!-- MyProfile Page: BEGIN -->
+	<string name="myprofile_title">My Profile</string>
+	<string name="provide_classes">Classes to Provide Help For</string>
+	<string name="consume_classes">Classes I Need Help With</string>
+	<!-- MyProfile Page: END -->
+	
+	<!-- Search Study Groups Page: BEGIN -->
+	<string name="search_title">Search For a Study Mob</string>
+	<string name="search_results_title">Search Results</string>
+	<string name="searchby_student_label">Enter Student Name: </string>
+	<string name="mob_name">Mob Name: </string>
+	<!-- Search Study Groups Page: END -->
+
+	<!-- Study Group Details Page: BEGIN -->
+	<string name="owner_label">Owner: </string>
+	<string name="location_label">Location: </string>
+	<string name="class_label">Class: </string>
+	<string name="time_label">Time: </string>
+	<string name="date_label">Date: </string>
+	<string name="members_label">Members: </string>
+	<string name="topic_label">Topic: </string>
+	<string name="join_group">Join Group</string>
+	<string name="general_info">General Information</string>
+	<!-- Study Group Details Page: END -->
+
+	<!-- Create Study Mob Page: BEGIN -->
+	<string name="create_title">Create a Study Mob</string>
+	<string name="create_mob">Create Mob</string>
+	<string name="allow_invite">Allow Users to Invite</string>
+	<string name="group_name_label">StudyMob Name: </string>
+	<string name="select_dept">Select Department: </string>
+	<string name="select_class">Select Class: </string>
+	<!-- Create Study Mob Page: END -->
+	
+	
+	<!-- Search By: BEGIN -->
+	<string name="searchby">Search By: </string>
+	<string name="searchby_prompt">Search By: </string>
+	<string-array name="searchby_array">
+	    <item></item>
+	    <item>Class</item>
+	    <item>Dept</item>
+	    
+	</string-array>
+	<!-- Search By: END -->
+	
+	<!-- Edit Profile: BEGIN -->
+	<string name="edit_name">Edit Name</string>
+	<string name="edit_provide">Edit Classes to Provide Help For</string>
+	<string name="edit_consumer">Edit Classes I Need Help With</string>
+	<!-- Edit Profile: BEGIN -->
+	
+	<!-- Date/Time: BEGIN -->
+	<string name="month_label">Month: </string>
+	<string name="day_label">Day: </string>
+	<string name="year_label">Year: </string>
+	<!-- Date/Time: END -->
+	
+	<!-- Notifications: BEGIN -->
+	<string name="notifications">Notifications</string>
+	<string name="requests">Requests</string>
+	<string name="invites">Invites</string>
+	<!-- Notifications: END -->
+	
+	<!-- Colors: BEGIN -->
+	<color name="grey">#C0C0C0</color>
+	<color name="red">#FF0000</color>
+	<color name="dodger_blue_2">#157DEC</color>
+	<!-- Colors: END -->
+    
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <!-- TITLE: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/edit_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="20sp"
+        android:layout_alignParentTop="true"/>
+    <!-- TITLE: END -->
+    
+    <!-- FORM: BEGIN -->
+    <ScrollView
+        android:id="@+id/form"
+        android:layout_width="fill_parent"
+        android:layout_height="360dp"
+        android:layout_below="@id/title"
+        android:fillViewport="true">
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	
+	        <TextView 
+	            android:id="@+id/first_name_label"
+	            android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/first_name"
+	        	android:paddingBottom="7sp"
+	        	android:paddingLeft="2sp"/>
+	        <EditText
+	            android:id="@+id/first_name_field"
+	            android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_below="@id/first_name_label"
+	        	android:background="@android:drawable/editbox_background"/>
+	        <TextView 
+	            android:id="@+id/last_name_label"
+	            android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_below="@id/first_name_field"
+	        	android:text="@string/last_name"
+	        	android:paddingTop="7sp"
+	        	android:paddingBottom="7sp"
+	        	android:paddingLeft="2sp"/>
+	        <EditText
+	            android:id="@+id/last_name_field"
+	            android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_below="@id/last_name_label"
+	        	android:background="@android:drawable/editbox_background"/>
+	        <TextView 
+	            android:id="@+id/email_label"
+	            android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_below="@id/last_name_field"
+	        	android:text="@string/email_label"
+	        	android:paddingBottom="7sp"
+	        	android:paddingTop="7sp"
+	        	android:paddingLeft="2sp"/>
+	        <EditText
+	            android:id="@+id/email_field"
+	            android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_below="@id/email_label"
+	        	android:background="@android:drawable/editbox_background"
+	        	android:inputType="textEmailAddress"/>
+	    </LinearLayout>
+    </ScrollView>
+    <!-- FORM: END -->
+
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+        android:id="@+id/buttons"
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/form"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+        <Button
+            android:id="@+id/cont"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/submit"/>
+	    <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/cont"
+        	android:onClick="onClick"
+        	android:text="@string/cancel"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+    
+</RelativeLayout>

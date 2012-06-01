@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- Title: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/myprofile_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="40sp"/>
+    <!-- Title: END -->
+    
+    <!-- User/Account Information: BEGIN -->
+	<LinearLayout
+	    android:id="@+id/account_info"
+	    android:layout_width="fill_parent"
+	    android:layout_height="315sp"
+	    android:orientation="vertical">
+	    <RelativeLayout 
+	        android:id="@+id/name"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp">
+	        <TextView 
+		        android:id="@+id/name_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/name"/>
+	        <TextView 
+		        android:id="@+id/name_field"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:text=""/>
+	    </RelativeLayout>
+	    <RelativeLayout 
+	        android:id="@+id/email"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="5sp"
+	        android:paddingRight="5sp"
+	        android:paddingTop="10sp"
+	        android:paddingBottom="10sp">
+	        <TextView 
+		        android:id="@+id/email_label"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:text="@string/email_label"/>
+	        <TextView
+	            android:id="@+id/email_field"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:text=""/>
+	    </RelativeLayout>
+	    <LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:gravity="center_horizontal"
+		    android:orientation="vertical"
+		    android:padding="10sp">
+		    <Button 
+		        android:id="@+id/provide_button"
+		        android:layout_width="200sp"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_horizontal|center_vertical"
+		        android:onClick="onClick"
+		        android:text="@string/provide_classes"/>
+		    <Button
+		        android:id="@+id/consume_button"
+		        android:layout_width="200sp"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_horizontal|center_vertical"
+		        android:onClick="onClick"
+		        android:text="@string/consume_classes"/>
+		    <Button
+		        android:id="@+id/mymobs_button"
+		        android:layout_width="200sp"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_horizontal|center_vertical"
+		        android:onClick="onClick"
+		        android:text="My Mobs"/>
+		    <Button
+		        android:id="@+id/edit_profile_button"
+		        android:layout_width="200sp"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_horizontal|center_vertical"
+		        android:onClick="onClick"
+		        android:text="@string/edit_profile"/>
+	    </LinearLayout>
+	</LinearLayout>
+    <!-- User/Account Information: END -->
+    
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+	    <Button
+            android:id="@+id/back"
+            android:layout_width="150sp"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/back"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+
+
+</LinearLayout>

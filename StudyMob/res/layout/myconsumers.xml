@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- Title: BEGIN -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Enrolled Classes"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="40sp"/>
+    <!-- Title: END -->
+    
+    <!-- List of Classes: BEGIN -->
+	<ListView 
+		android:id="@android:id/list"
+		android:layout_width="wrap_content"
+		android:layout_height="315sp"
+		android:clickable="false"></ListView>
+    <!-- List of Classes: END -->
+    
+    <!-- BUTTONS: BEGIN -->
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/grey"
+        android:padding="10sp">
+	    <Button
+            android:id="@+id/back"
+            android:layout_width="150sp"
+        	android:layout_height="wrap_content"
+        	android:onClick="onClick"
+        	android:text="@string/back"/>
+	</RelativeLayout>
+    <!-- BUTTONS: END -->
+</LinearLayout>
