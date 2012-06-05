@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Invites extends ListActivity {
 	private String location_id;
@@ -26,6 +27,8 @@ public class Invites extends ListActivity {
 	private ArrayList<String> mobs = new ArrayList<String>();
 	private ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 	private SimpleAdapter adapter;
+	private int size_of_group = 0;
+	private int maxSize = 0;
 	protected static int selected_group_id;
 	
 	@Override
@@ -63,7 +66,7 @@ public class Invites extends ListActivity {
 				
 				group_id = temporary_json.getString("value");
 
-
+				checkGroupSize(Integer.parseInt(group_id));
 				
 				class_id = StudyMob.model.getGroup(Integer.parseInt(group_id));
 				//Ask Server for the name of the class
@@ -80,6 +83,7 @@ public class Invites extends ListActivity {
 				JSONObject tmp2_json = tmp_json.getJSONObject(0);
 				group_name = tmp2_json.getString("name");
 				group_topic = tmp2_json.getString("topic");
+				maxSize = Integer.parseInt(tmp2_json.getString("max_size"));
 				class_name = getClass(Integer.parseInt(tmp2_json.getString("class_id")));
 				//Display the class name followed by group name and the topic
 				mobs.add(group_name + " : " + group_topic);
@@ -109,7 +113,20 @@ public class Invites extends ListActivity {
 			this.finish();
 		}
 	}
-	
+	private void checkGroupSize(int groupid){
+		String maxsize = StudyMob.model.getGroupUsers(groupid);
+		
+		JSONArray json_users = null;
+		
+		try {
+			JSONObject json = new JSONObject(maxsize);
+			json_users = json.getJSONArray("users");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		size_of_group = json_users.length();
+		
+	}
 	private String getClass(int classid) {
 		String response = StudyMob.model.getClass(Integer.toString(classid));
 		String course = new String();
@@ -139,15 +156,35 @@ public class Invites extends ListActivity {
 		HashMap selected_item = (HashMap) mylist.getItemAtPosition(position);
 		selected_group_id = Integer.parseInt(selected_item.get("groupid").toString());
 
+		
+		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+		builder2.setMessage("Sorry but the group is full")
+		       .setCancelable(false)
+		       .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+	        		   dialog.cancel();	        	   
+		        	   startActivity(getIntent());
+		        	   finish();
+		           }
+		       });
+		final AlertDialog alert2 = builder2.create();
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Do you want to accept this invite?")
 		       .setCancelable(false)
 		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   	//**ACCEPT INVITE
+		        	   if(size_of_group >= maxSize){
+		        		   StudyMob.model.denyJoin(Login.mainuser.getUserID(),selected_group_id);
+		        		   dialog.cancel();
+			        	   alert2.show();		        		   
+		        	   }
+		        	   else{
 		        	   	StudyMob.model.acceptJoin(Login.mainuser.getUserID(),selected_group_id);
 		        		startActivity(getIntent());
 		        		finish();
+		        	   }
 		           }
 		       })
 		       .setNeutralButton("No", new DialogInterface.OnClickListener() {

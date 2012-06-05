@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class ServerModel {
 	protected static WebServer server = new WebServer();
 	private String response = new String();
 
-	public void ServerModel(){
-	
-	}
+	public void ServerModel() {}
 	
 	public String Task(ArrayList<String> parameters){
 			String exec = parameters.get(0);
@@ -37,7 +33,8 @@ public class ServerModel {
 			}
 			else if(exec.compareTo("newMob") == 0){
 				response = newMob(Integer.parseInt(parameters.get(1)), parameters.get(2), parameters.get(3),parameters.get(4), parameters.get(5), parameters.get(6), parameters.get(7),
-						parameters.get(8), parameters.get(9), parameters.get(10), Integer.parseInt(parameters.get(11)));
+						parameters.get(8), parameters.get(9), parameters.get(10), Integer.parseInt(parameters.get(11)), parameters.get(12), parameters.get(13),
+						parameters.get(14), parameters.get(15), parameters.get(16));
 			}
 			else if(exec.compareTo("forgotPassword") == 0){
 				response = forgotPassword(parameters.get(1));
@@ -59,9 +56,6 @@ public class ServerModel {
 			}
 			else if(exec.compareTo("getUserProvide") == 0){
 				response = getUserProvide(Integer.parseInt(parameters.get(1)));
-			}
-			else if(exec.compareTo("editUser") == 0){
-				response = editUser(parameters.get(1), parameters.get(2), parameters.get(3));
 			}
 			else if(exec.compareTo("editUser") == 0){
 				response = editUser(parameters.get(1), parameters.get(2), parameters.get(3));
@@ -193,7 +187,8 @@ public class ServerModel {
 	}
 	
 	public String newMob(int user_id, String class_name, String group_name, String topic, String location, 
-			String month, String day, String year, String time, String ampm, int max_size){
+			String month, String day, String year, String time, String ampm, int max_size, String end_month,
+			String end_day, String end_year, String end_time, String end_ampm){
 		JSONObject new_mob = new JSONObject(); //DONE
 		try {
 			new_mob.put("action", "create_group");
@@ -208,6 +203,11 @@ public class ServerModel {
 			new_mob.put("time", time);
 			new_mob.put("ampm", ampm);
 			new_mob.put("maxsize", max_size);
+			new_mob.put("end_month", end_month);
+			new_mob.put("end_day", end_day);
+			new_mob.put("end_year", end_year);
+			new_mob.put("end_time", end_time);
+			new_mob.put("end_ampm", end_ampm);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -622,7 +622,7 @@ public class ServerModel {
 		try {
 			request.put("action", "accept_join");
 			request.put("user_id", user_id);
-			request.put("grup_id", user_id);
+			request.put("group_id", group_id);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -635,7 +635,7 @@ public class ServerModel {
 		try {
 			request.put("action", "deny_invite");
 			request.put("user_id", user_id);
-			request.put("grup_id", user_id);
+			request.put("group_id", group_id);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

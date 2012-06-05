@@ -127,6 +127,7 @@ else {
 			$hour_minute = explode( ":" , $json[ "time" ] );
 			$hour = $hour_minute[ 0 ];
 			$meridian = $json[ "ampm" ];
+			
 			if ( $meridian=="PM" ) {
 				$hour += 12;
 			} else if ( $hour==12 ) {
@@ -138,8 +139,35 @@ else {
 				$hour = "0" . $hour;
 			}
 			
+			if ( strlen( $json[ "day_end" ] ) < 2 ) {
+				$day_end = "0" . $json[ "day_end" ];
+			} else {
+				$day_end = $json[ "day_end" ];
+			}
+			
 			$time = $json[ "year" ] . "-" . $month . "-" . $day . " " . $hour . ":" . $hour_minute[ 1 ] . ":00";
+			/*
+			this has the end_time stuff
+			$month_end = $monthList[ $json[ "month_end" ] ];
+			$hour_minute_end = explode( ":" , $json[ "time_end" ] );
+			$hour_end = $hour_minute_end[ 0 ];
+			$meridian_end = $json[ "ampm_end" ];
+			
+			if ( $meridian_end=="PM" ) {
+				$hour_end += 12;
+			} else if ( $hour_end==12 ) {
+				// it has to be AM
+				// so just reduce it to 0
+				$hour_end = 0;
+			}
+			if ( strlen( $hour_end ) < 2 ) {
+				$hour_end = "0" . $hour_end;
+			}
+			$time_end = $json[ "year" ] . "-" . $month_end . "-" . $day_end . " " . $hour_end . ":" . $hour_minute_end[ 1 ] . ":00";
+		*/
 			echo createGroup( $json[ "user_id" ] , $json[ "class_name" ] , $json[ "group_name" ] , $json[ "topic" ] , $json[ "location" ] , $time , $json[ "maxsize" ] );
+			// line below includes end_time
+//			echo createGroup( $json[ "user_id" ] , $json[ "class_name" ] , $json[ "group_name" ] , $json[ "topic" ] , $json[ "location" ] , $time , $end_time , $json[ "maxsize" ] );
 			break;
 		case "join_group":
 			echo joinGroup( $json[ "group_id" ] , $json[ "user_id" ] );
@@ -242,8 +270,8 @@ else {
 		case "get_member_status":
 			echo getMemberStatus( $json[ "user_id" ] , $json[ "group_id" ] ); // in groups.php
 			break;
-		case "get_my_mobs":
-			echo getMyMobs( $json[ "user_id" ] );
+		case "get_groups_by_user_id":
+			echo getGroupByUserId( $json[ "user_id" ] );	// group.php
 			break;
 		default:
 			echo "no action available";

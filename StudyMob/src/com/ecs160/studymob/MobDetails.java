@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ public class MobDetails extends Activity {
 	private String location;
 	private int classid;
 	private int maxsize;
-	private ArrayList<Integer> members_id = new ArrayList<Integer>();
+	private int size_of_group = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class MobDetails extends Activity {
 			// else if the user isn't the owner and isn't already in the group, ask to join group
 			else if (!useringroup && !userisowner) {
 				// if group capacity is reached, show error
-				if (members_id.size() >= maxsize)
+				if (size_of_group >= maxsize)
 					Toast.makeText(context, "Group Capacity Reached!", Toast.LENGTH_SHORT).show();
 				else {
 					response = StudyMob.model.joinGroup(Login.mainuser.getUserID(), selected_mob_id);
@@ -121,6 +122,18 @@ public class MobDetails extends Activity {
 				e.printStackTrace();
 			}
 		}
+		String maxsize = StudyMob.model.getGroupUsers(selected_mob_id);
+		
+		JSONArray json_users = null;
+		
+		try {
+			JSONObject json = new JSONObject(maxsize);
+			json_users = json.getJSONArray("users");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		size_of_group = json_users.length();
+		//Log.i("SIZE", "# of PEOPLE IN THE GROUP ARE " + size_json);
 		
 		getLocation(locationid);
 		getOwner(ownerid);
@@ -192,7 +205,6 @@ public class MobDetails extends Activity {
 		}
 		else {
 			userisowner = false;
-			//if (members_id.contains(Login.mainuser.getUserID())) {
 			if (getMemberStatus().equals("in group")) {
 				useringroup = true;
 				action.setText("Leave Mob");

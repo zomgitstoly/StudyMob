@@ -48,7 +48,8 @@ public class EditName extends Activity {
 			       .setCancelable(false)
 			       .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
-			        	   	StudyMob.model.editUser(first_name, last_name, email);		        	   
+			        	   	StudyMob.model.editUser(first_name, last_name, email);	
+			        	   	Login.mainuser.setName(first_name, last_name);
 			    			Intent i = new Intent(EditName.this, EditProfile.class);
 			    			startActivity(i);
 			    			finish();

@@ -97,10 +97,6 @@
 		return parseObject( "consumers" , db_run_query( $query ) );
 	}
 	
-	function getInviteRequests( $user_id ) {
-		//$query = "SELECT * FROM `user_metadata` WHERE ";
-	}
-	
 	function forgotPassword( $email ) {
 		$query = "SELECT user_id FROM user WHERE email='".$email."'";
 		$result = mysql_query( $query );
@@ -198,6 +194,11 @@
 	function removeBuddy( $user_id , $friend_id ) {
 		$query = "DELETE FROM user_metadata WHERE user_id=".$user_id." AND title='buddy' AND value='".$friend_id."'";
 		mysql_query( $query );
+	}
+	
+	function getInviteRequests( $user_id ) {
+		$query = "SELECT * FROM `user_metadata` WHERE title='invite' AND user_id = $user_id";
+		return parseObject( "invites" , db_run_query( $query ) );
 	}
 	
 ?>

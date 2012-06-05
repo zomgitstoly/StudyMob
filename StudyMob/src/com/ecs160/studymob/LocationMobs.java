@@ -35,17 +35,7 @@ public class LocationMobs extends ListActivity {
 		test.setText("Current StudyMobs at " + b.getString("name")); //gets the name of the location from the bundle
 		location_id = b.getString("location"); //Get the location id from bundle this is used to get the groups
 		Log.i("Location_id", location_id);
-		//TODO: Fetch the mobs at this location
-		/*
-		//Send request for the groups in this location
-		JSONObject request_provide = new JSONObject();
-		try {
-			request_provide.put("action","get_groups_in_location");
-			request_provide.put("location_id",location_id);
-		}
-		catch (JSONException e) {
-			e.printStackTrace();
-		}*/
+
 		
 		response = StudyMob.model.getGroupsinLocation(location_id);
 		
@@ -74,18 +64,7 @@ public class LocationMobs extends ListActivity {
 				group_id = temporary_json.getString("group_id");
 				group_name =  temporary_json.getString("name"); //name of the group
 				group_topic = temporary_json.getString("topic"); //name of the topic
-				//***** prob can can some code here to get the group_id to set up the details intent if they click on the item
-				//***** might need to add new array to keep them in the same order as they appear so you know the index 
-				
-				/*
-				//Ask Server for the name of the class
-				try {
-					class_json.put("action","get_class");
-					class_json.put("class_id", temporary_json.getString("class_id"));
-				} catch (JSONException e) {
-		   			// TODO Auto-generated catch block
-		   			e.printStackTrace();
-				}*/
+
 				class_name_srvr = StudyMob.model.getClass(temporary_json.getString("class_id"));
 				//Extract the actual name from the array
 				JSONArray tmp_json = null;
@@ -112,12 +91,6 @@ public class LocationMobs extends ListActivity {
 			}
 		}
 		
-		//******* Need to add the cursor adapter and w/e u need to see which group they clicked on to start the details intent ************
-		//********
-		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.mob_list_item, mobs);
-		mylist.setAdapter(adapter);
-		mylist.setItemsCanFocus(false);
-		mylist.setTextFilterEnabled(true);*/
 		adapter = new SimpleAdapter(this, list, R.layout.mob_list_item,
 				new String[] {"class", "name", "topic"},
 				new int[] {R.id.class_field, R.id.name_field, R.id.topic_field});
@@ -144,11 +117,7 @@ public class LocationMobs extends ListActivity {
 		i.putExtras(b);
 		startActivity(i);
 	}
-	
-	/* Handle when the back button is pressed. After the Twitter 'Accept' webpage
-     * has issued you a pin, you need to enter it, and the pressing the back button allows you
-     * to go back to your Application start page, as opposed to ending the Activity.
-    */
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) ) {

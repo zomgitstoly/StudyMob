@@ -31,6 +31,8 @@ public class EditProfile extends Activity {
 			finish();
 		}
 		else if (v.equals(findViewById(R.id.back))) {
+			Intent i = new Intent(this, MyProfile.class);
+			startActivity(i);
 			finish();
 		}
 	}

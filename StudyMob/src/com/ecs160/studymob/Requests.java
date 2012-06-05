@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Requests extends ListActivity {
 	
@@ -27,6 +28,8 @@ public class Requests extends ListActivity {
 	private ArrayList<String> mobs = new ArrayList<String>();
 	protected static int selected_user_name;
 	protected static int selected_mob_id;
+	private int size_of_group = 0;
+	private int maxSize = 0;
 	private ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 	private SimpleAdapter adapter;
 	
@@ -68,7 +71,8 @@ public class Requests extends ListActivity {
 				
 				group_id = temporary_json.getString("group_id");
 				group_name =  temporary_json.getString("name"); //name of the group
-				
+				maxSize = Integer.parseInt(temporary_json.getString("max_size"));
+				checkGroupSize(Integer.parseInt(group_id));
 				//Ask Server Users who requested
 				class_name_srvr = StudyMob.model.getJoinRequests(group_id);
 				//Extract the actual name from the array
@@ -122,16 +126,35 @@ public class Requests extends ListActivity {
 		
 		selected_mob_id = Integer.parseInt(selected_item.get("groupid").toString());
 		selected_user_name = Integer.parseInt(selected_item.get("userid").toString());
+		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+		builder2.setMessage("Sorry but the group is full")
+		       .setCancelable(false)
+		       .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+	        		   dialog.cancel();	        	   
+		        	   startActivity(getIntent());
+		        	   finish();
+		           }
+		       });
+		final AlertDialog alert2 = builder2.create();
 		
+		//Alert when pressing the button
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Are you sure you want to accept this user?")
 		       .setCancelable(false)
 		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   	//**SEND REQUEST TO SERVER WITH THE ACCEPT
+		        	   if(size_of_group >= maxSize){
+		        		   StudyMob.model.denyJoin(selected_user_name,selected_mob_id);
+		        		   dialog.cancel();
+		        		   alert2.show();
+		        	   }
+		        	   else{
 		        	   	StudyMob.model.acceptJoin(selected_user_name,selected_mob_id);
 		        		startActivity(getIntent());
 		        		finish();
+		        	   }
 		           }
 		       })
 		       .setNeutralButton("No", new DialogInterface.OnClickListener() {
@@ -151,7 +174,20 @@ public class Requests extends ListActivity {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-
+	private void checkGroupSize(int groupid){
+		String maxsize = StudyMob.model.getGroupUsers(groupid);
+		
+		JSONArray json_users = null;
+		
+		try {
+			JSONObject json = new JSONObject(maxsize);
+			json_users = json.getJSONArray("users");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		size_of_group = json_users.length();
+		
+	}
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) ) {

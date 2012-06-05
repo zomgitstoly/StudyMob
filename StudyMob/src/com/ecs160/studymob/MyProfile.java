@@ -36,6 +36,7 @@ public class MyProfile extends Activity {
 		else if (v.equals(findViewById(R.id.edit_profile_button))){
 			Intent i = new Intent(this, EditProfile.class);
 			startActivity(i);
+			finish();
 		}
 		else if (v.equals(findViewById(R.id.mymobs_button))) {
 			Intent i = new Intent(this, MyMobs.class);

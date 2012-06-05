@@ -57,6 +57,11 @@ public class CreateStudyMob extends Activity {
 			Spinner time_field = (Spinner) findViewById(R.id.time_spinner);
 			Spinner ampm_field = (Spinner) findViewById(R.id.ampm_spinner);
 			Spinner maxsize_field = (Spinner) findViewById(R.id.maxsize_spinner);
+			Spinner end_month_field = (Spinner) findViewById(R.id.end_months_spinner);
+			Spinner end_day_field = (Spinner) findViewById(R.id.end_days_spinner);
+			Spinner end_year_field = (Spinner) findViewById(R.id.end_year_spinner);
+			Spinner end_time_field = (Spinner) findViewById(R.id.end_time_spinner);
+			Spinner end_ampm_field = (Spinner) findViewById(R.id.end_ampm_spinner);
 
 			String group_name = name_field.getText().toString().trim();
 			String topic = topic_field.getText().toString().trim();
@@ -68,10 +73,15 @@ public class CreateStudyMob extends Activity {
 			String time = time_field.getSelectedItem().toString().trim();
 			String ampm = ampm_field.getSelectedItem().toString().trim();
 			int maxsize = Integer.parseInt(maxsize_field.getSelectedItem().toString());
+			String end_month = end_month_field.getSelectedItem().toString().trim();
+			String end_day = end_day_field.getSelectedItem().toString().trim();
+			String end_year = end_year_field.getSelectedItem().toString().trim();
+			String end_time = end_time_field.getSelectedItem().toString().trim();
+			String end_ampm = end_ampm_field.getSelectedItem().toString().trim();
 			
 			// returns group_id on success
-			response =StudyMob.model.newMob(Login.mainuser.getUserID(), class_name, group_name, topic, 
-					location, month, day, year, time, ampm, maxsize);
+			response =StudyMob.model.newMob(Login.mainuser.getUserID(), class_name, group_name, topic, location,
+					month, day, year, time, ampm, maxsize, end_month, end_day, end_year, end_time, end_ampm);
 			if (!response.equals("Error: could not insert")) {
 				//StudyMob.mobs.add(created_mob);
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -94,12 +104,6 @@ public class CreateStudyMob extends Activity {
 			finish();
 		}
 	}
-	
-	private String getDate(String day, String month, String year) {
-		return month + "/" + day + "/" + year;
-	}
-	
-	private String getTime(String time, String ampm) { return time + " " + ampm; }
 	
 	private void setLocations() {
 		locations.add("--");
@@ -156,6 +160,7 @@ public class CreateStudyMob extends Activity {
 	}
 	
 	private void setDateTime() {
+		/* START DATE/TIME */
 		Spinner months_spinner = (Spinner) findViewById(R.id.months_spinner);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,months);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -180,6 +185,32 @@ public class CreateStudyMob extends Activity {
 		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,ampm_arr);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		ampm_spinner.setAdapter(adapter);
+		
+		/* END DATE/TIME */
+		Spinner end_months_spinner = (Spinner) findViewById(R.id.end_months_spinner);
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,months);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		end_months_spinner.setAdapter(adapter);
+		
+		Spinner end_days_spinner = (Spinner) findViewById(R.id.end_days_spinner);
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,days);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		end_days_spinner.setAdapter(adapter);
+		
+		Spinner end_years_spinner = (Spinner) findViewById(R.id.end_year_spinner);
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,years);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		end_years_spinner.setAdapter(adapter);
+		
+		Spinner end_time_spinner = (Spinner) findViewById(R.id.end_time_spinner);
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,times);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		end_time_spinner.setAdapter(adapter);
+		
+		Spinner end_ampm_spinner = (Spinner) findViewById(R.id.end_ampm_spinner);
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,ampm_arr);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		end_ampm_spinner.setAdapter(adapter);
 	}
 	
 	private void setMaxSize() {

@@ -1,7 +1,10 @@
 <?php
+// the 2 lines below lets you use a class_id
 //	function createGroup( $user_id , $class_id , $name , $topic , $location_id , $time ) {
 //		$query = 'INSERT INTO `group` ( user_id , class_id , name , topic , location_id , time ) VALUE ( '.$user_id.' , '.$class_id.' , "'.$name.'" , "'.$topic.'" , '.$location_id.' , "'.$time.'" )';
-	function createGroup( $user_id , $class_name , $group_name , $topic , $location , $time , $maxsize ) {
+	function createGroup( $user_id , $class_name , $group_name , $topic , $location , $time , $end_time , $maxsize ) {
+// the line below DOSE NOT include end time
+//	function createGroup( $user_id , $class_name , $group_name , $topic , $location , $time , $maxsize ) {
 		$query = "SELECT location_id FROM location WHERE name = '$location'";
 		$result = mysql_query( $query );
 		$row = mysql_fetch_array( $result );
@@ -15,8 +18,10 @@
 		$group_name = db_clean_data( $group_name );
 		$topic = db_clean_data( $topic );
 		$location = db_clean_data( $location );
-		
-		$query = "INSERT INTO `group` ( user_id , class_id , name , topic , location_id , time , max_size ) VALUES ( ".$user_id.", ".$class_id.", '".$group_name."', '".$topic."', ".$location_id." , '".$time."', ".$maxsize." )";
+	
+		$query = "INSERT INTO `group` ( user_id , class_id , name , topic , location_id , time , end_time , max_size ) VALUES ( ".$user_id.", ".$class_id.", '".$group_name."', '".$topic."', ".$location_id." , '".$time."', '".$end_time."', ".$maxsize." )";
+// commented line DOES NOT include end_time
+//		$query = "INSERT INTO `group` ( user_id , class_id , name , topic , location_id , time , max_size ) VALUES ( ".$user_id.", ".$class_id.", '".$group_name."', '".$topic."', ".$location_id." , '".$time."', ".$maxsize." )";
 		$result = mysql_query( $query );
 		if ( !$result )
 			return "Error: could not insert";
@@ -25,7 +30,7 @@
 	}
 	
 	function getGroups() {
-		$query = "SELECT * FROM `group` WHERE time > date_add( CURRENT_TIMESTAMP , INTERVAL -1 DAY ) AND time < date_add( CURRENT_TIMESTAMP , INTERVAL 6 DAY )";
+		$query = "SELECT * FROM `group` WHERE time > date_add( CURRENT_TIMESTAMP , INTERVAL -1 DAY ) AND time < date_add( CURRENT_TIMESTAMP , INTERVAL 6 DAY ) AND end_time < CURRENT_TIMESTAMP";
 		return parseObject( "groups" , db_run_query( $query ) );
 	}
 	
@@ -39,12 +44,12 @@
 	}
 	
 	function getGroupsInLocation( $location_id ) {
-		$query = "SELECT * FROM `group` WHERE location_id=".$location_id;
+		$query = "SELECT * FROM `group` WHERE location_id=".$location_id." AND time > date_add( CURRENT_TIMESTAMP , INTERVAL -1 DAY ) AND time < date_add( CURRENT_TIMESTAMP , INTERVAL 6 DAY ) AND end_time < CURRENT_TIMESTAMP";
 		return parseObject( "groups" , db_run_query( $query ) );
 	}
 	
 	function getGroupsInLocationCount( $location_id ) {
-		$query = "SELECT count( group_id ) AS number FROM `group` WHERE location_id=".$location_id;
+		$query = "SELECT count( group_id ) AS number FROM `group` WHERE location_id=".$location_id." AND time > date_add( CURRENT_TIMESTAMP , INTERVAL -1 DAY ) AND time < date_add( CURRENT_TIMESTAMP , INTERVAL 6 DAY ) AND end_time < CURRENT_TIMESTAMP";
 		$result = mysql_query( $query );
 		$row = mysql_fetch_array( $result );
 		return $row[ 0 ];
@@ -55,7 +60,7 @@
 		$result = db_run_query( $query );
 		$class_id = $result[0][ "class_id" ];
 		
-		$query = "SELECT * FROM `group` WHERE class_id=".$class_id;
+		$query = "SELECT * FROM `group` WHERE class_id=".$class_id." AND time > date_add( CURRENT_TIMESTAMP , INTERVAL -1 DAY ) AND time < date_add( CURRENT_TIMESTAMP , INTERVAL 6 DAY ) AND end_time < CURRENT_TIMESTAMP";
 		return parseObject( "groups" , db_run_query( $query ) );
 	}
 	
@@ -71,11 +76,33 @@
 			return "Already in group";
 		}
 		
-		$query = 'INSERT INTO `group_metadata` ( group_id , title , value ) VALUE ( '.$group_id.' , "joinrequest" , "'.$user_id.'" )';
+		// check if they already are in the group
+		$query = "SELECT value FROM `group_metadata` WHERE group_id=".$group_id." AND title='joinrequest' AND value='".$user_id."'";
 		$result = mysql_query( $query );
-		if ( !$result )
+		if ( mysql_num_rows( $result ) > 0 ) {
+			return "Already invited";
+		}
+	
+		// check if the friend has been invited already
+		$query = "SELECT user_id FROM `user_metadata` WHERE user_id=".$user_id." AND title='invite' AND value='".$group_id."'";
+		$result = mysql_query( $query );
+		if ( mysql_num_rows( $result ) > 0 ) {
+			return "Already invited to group";
+		}
+
+		$query = "SELECT max_size FROM `group` WHERE group_id=".$group_id;
+		$result = mysql_query( $query );
+		$row = mysql_fetch_array( $result );
+		$max_size = $row[ 0 ];
+		
+		$query = 'INSERT INTO `group_metadata` ( group_id , title , value ) SELECT '.$group_id.',"joinrequest","'.$user_id.'" FROM `group_metadata` WHERE group_id='.$group_id.' AND title="member" HAVING COUNT(title) < '.$max_size;
+		$result = mysql_query( $query );
+		
+		if ( $result==false )
 			return "Error: could not insert";
-			
+		else if ( mysql_affected_rows( )==0 )
+			return "Error: max size";
+				
 		return mysql_insert_id();
 	}
 	
@@ -115,9 +142,19 @@
 			return "Already invited to group";
 		}
 		
+		$query = "SELECT max_size FROM `group` WHERE group_id=".$group_id;
+		$result = mysql_query( $query );
+		$row = mysql_fetch_array( $result );
+		$max_size = $row[ 0 ];
+		
 		// otherwise invite them
-		$query = "INSERT INTO `user_metadata` ( user_id , title , value ) VALUES ( ".$user_id." , 'invite' , '".$group_id."' )";
-		mysql_query( $query );
+		$query = 'INSERT INTO `user_metadata` ( user_id , title , value ) SELECT '.$user_id.',"invite","'.$group_id.'" FROM `group_metadata` WHERE group_id='.$group_id.' AND title="member" HAVING COUNT(title) < '.$max_size;
+		$result = mysql_query( $query );
+		if ( !$result )
+			return "Error: could not insert";
+		else if ( mysql_num_rows( $query )==0 )
+			return "Error: max size";
+			
 	}
 	
 	function getJoinRequests( $group_id ) {
@@ -131,13 +168,38 @@
 	}
 	
 	function acceptJoin( $user_id , $group_id ) {
+		$query = "DELETE FROM `user_metadata` WHERE user_id=".$user_id." AND title='invite' AND value='".$group_id."'";
+		$result = mysql_query( $query );
+		
 		$query = "DELETE FROM `group_metadata` WHERE group_id = " . $group_id . " AND value = " . $user_id;
 		$result = mysql_query( $query );
 		
-		$query = "INSERT INTO `group_metadata` ( group_id , title, value ) VALUES ( $group_id , 'member' , $user_id )";
+		$query = "SELECT max_size FROM `group` WHERE group_id=".$group_id;
 		$result = mysql_query( $query );
+		$row = mysql_fetch_array( $result );
+		$max_size = $row[ 0 ];
+		
+		$query = "SELECT max_size FROM `group` WHERE group_id=".$group_id;
+		$result = mysql_query( $query );
+		$row = mysql_fetch_array( $result );
+		$max_size = $row[ 0 ];
+		
+		$query = 'INSERT INTO `group_metadata` ( group_id , title , value ) SELECT '.$group_id.',"member","'.$user_id.'" FROM `group_metadata` WHERE group_id='.$group_id.' AND title="member" HAVING COUNT(title) < '.$max_size;
+		$result = mysql_query( $query );
+		if ( !$result )
+			return "Error: could not insert";
+		else if ( mysql_num_rows( $query )==0 )
+			return "Error: max size";
 		
 		return "added to group!";
+	}
+	
+	function denyJoin( $user_id , $group_id ) {
+		$query = "DELETE FROM `user_metadata` WHERE user_id=".$user_id." AND title='invite' AND value='".$group_id."'";
+		$result = mysql_query( $query );
+		
+		$query = "DELETE FROM `group_metadata` WHERE group_id=".$group_id." AND title='joinrequest' AND value=".$user_id;
+		$result = mysql_query( $query );
 	}
 	
 	function getGroupConsumers( $class_id ) {
@@ -159,8 +221,8 @@
 			return "not in group";
 	}
 	
-	function getMyMobs( $user_id ) {
-		$query = "SELECT * FROM `group` WHERE user_id = $user_id";
+	function getGroupsByUserId( $user_id ) {
+		$query = "SELECT * FROM `group` WHERE group_id IN (SELECT group_id FROM `group_metadata` WHERE value = $user_id AND title = 'member')";
 		return parseObject( "groups" , db_run_query( $query ) );
 	}
 	

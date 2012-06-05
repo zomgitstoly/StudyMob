@@ -60,73 +60,75 @@ public class InviteList extends ListActivity {
 		size = groups_json.length();
 		String user_id;
 		String user_name;
-
-		for (int i = 0; i < size; i++) {
-			try {
-				JSONObject temporary_json = groups_json.getJSONObject(i);	
-				user_id = temporary_json.getString("user_id");
-
-				//Ask Server for the name of the class
-				user_name = StudyMob.model.getUser(Integer.parseInt(user_id));
-
-				mobs.add(user_name + " : " + user_id);
-				HashMap<String,String> temp = new HashMap<String,String>();
-				temp.put("userid", user_id);
-				temp.put("name", user_name);
-				if(list.contains(temp) == false){
-					list.add(temp);
+		if(size > 0){
+			for (int i = 0; i < size; i++) {
+				try {
+					JSONObject temporary_json = groups_json.getJSONObject(i);	
+					user_id = temporary_json.getString("user_id");
+	
+					//Ask Server for the name of the class
+					user_name = StudyMob.model.getUser(Integer.parseInt(user_id));
+	
+					mobs.add(user_name + " : " + user_id);
+					HashMap<String,String> temp = new HashMap<String,String>();
+					temp.put("userid", user_id);
+					temp.put("name", user_name);
+					if(list.contains(temp) == false){
+						list.add(temp);
+					}
+	
+				}  catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+			}
+		
 
+			//Getting the Providers
+			response = StudyMob.model.getGroupProviders(selected_class_id);
+			Log.i("Response", response);
+			
+			groups_json = null;
+			size = 0;
+			try {
+				JSONObject json = new JSONObject( response );
+				groups_json = json.getJSONArray("providers");
 			}  catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		//Getting the Providers
-		response = StudyMob.model.getGroupProviders(selected_class_id);
-		Log.i("Response", response);
-		
-		groups_json = null;
-		size = 0;
-		try {
-			JSONObject json = new JSONObject( response );
-			groups_json = json.getJSONArray("providers");
-		}  catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		size = groups_json.length();
-		user_id = null;
-		user_name = null;
-
-		for (int i = 0; i < size; i++) {
-			try {
-				JSONObject temporary_json = groups_json.getJSONObject(i);	
-				user_id = temporary_json.getString("user_id");
-
-				//Ask Server for the name of the class
-				user_name = StudyMob.model.getUser(Integer.parseInt(user_id));
-
-				mobs.add(user_name + " : " + user_id);
-				HashMap<String,String> temp = new HashMap<String,String>();
-				temp.put("userid", user_id);
-				temp.put("name", user_name);
-				if(list.contains(temp) == false){
-					list.add(temp);
+			
+			size = groups_json.length();
+			user_id = null;
+			user_name = null;
+	
+			for (int i = 0; i < size; i++) {
+				try {
+					JSONObject temporary_json = groups_json.getJSONObject(i);	
+					user_id = temporary_json.getString("user_id");
+	
+					//Ask Server for the name of the class
+					user_name = StudyMob.model.getUser(Integer.parseInt(user_id));
+	
+					mobs.add(user_name + " : " + user_id);
+					HashMap<String,String> temp = new HashMap<String,String>();
+					temp.put("userid", user_id);
+					temp.put("name", user_name);
+					if(list.contains(temp) == false){
+						list.add(temp);
+					}
+	
+				}  catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-
-			}  catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			
+			adapter = new SimpleAdapter(this, list, R.layout.mob_list_invite,
+					new String[] {"name"},
+					new int[] {R.id.name_field});
+			mylist.setAdapter(adapter);
 		}
-		
-		adapter = new SimpleAdapter(this, list, R.layout.mob_list_invite,
-				new String[] {"name"},
-				new int[] {R.id.name_field});
-		mylist.setAdapter(adapter);
 	}
 	
 	public void onClick(View v) {
