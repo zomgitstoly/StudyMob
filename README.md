@@ -59,6 +59,7 @@ Welcome to Team Lincoln's StudyMob project for ECS 160 at UC Davis! StudyMob is 
 
 ### Robin Chang
 rtchang@ucdavis.edu
+
 Robin provided the team with the backend server and database for the application to communicate with. He also handled most of the server side coding with PHP and creating the database structure. For the Java side, Robin also figured out how to decipher the server responses that contained JSONObjects in array format.
 
 
