@@ -58,14 +58,19 @@ Welcome to Team Lincoln's StudyMob project for ECS 160 at UC Davis! StudyMob is 
 
 
 ### Robin Chang
+rtchang@ucdavis.edu
 Robin provided the team with the backend server and database for the application to communicate with. He also handled most of the server side coding with PHP and creating the database structure. For the Java side, Robin also figured out how to decipher the server responses that contained JSONObjects in array format.
 
 
 ### Anatoly Torchinsky
+anatoly.torchinsky@gmail.com
+
 Anatoly was the main contributer to getting the Google Maps API up and running for our application. In addition to providing functionality with searching for StudyMobs using Google Maps, he also implemented the Asynchronous Tasks for activities which require some time to load information from the server before the starting the new activity. He also added functionality to the application, such as editing a user's account information, and the notifications page (mainly handled the invite notifications while Wylie handled the join request notifications).
 
 
 ### Wylie Wong
+wylief.wong@gmail.com
+
 Wylie had roles on both the Android side and the server side. He and Anatoly provided a bulk of the functionality on the Android side. One of the key features that Wylie worked on was implementing the search for a Study Mob system. Another part of the project that he worked on was creating a new Study Mob, as well as producing the list of classes for a user to choose from while picking which classes they can provide expertise on and which classes they needed help on. Wylie also assisted Robin in handling the server side.
 
   
